@@ -1,35 +1,22 @@
 #!/usr/bin/python3
-"""
-Definning a Rectangle class.
+"""rectangle
 """
 from models.base import Base
 
 
 class Rectangle(Base):
+    """Inherits from Base
     """
-    Representing a Rectangle.
-    """
+
     def __init__(self, width, height, x=0, y=0, id=None):
-        """
-        Initializing a new Rectangle.
-        Argumments:
-            width  (int): The width of the new Rectangle.
-            height (int): The heigth of the new Rectangle.
-            x      (int): The x coordinate of the new Rectangle.
-            y      (int): The Y coordinate of the new Rectangle.
-            id     (int): The identify of the new Rectangle.
-        """
+        super().__init__(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
-        super().__init__(id)
 
     @property
     def width(self):
-        """
-        Getting the width of the Rectangle.
-        """
         return self.__width
 
     @width.setter
@@ -42,9 +29,6 @@ class Rectangle(Base):
 
     @property
     def height(self):
-        """
-        Getting the height of the Rectangle.
-        """
         return self.__height
 
     @height.setter
@@ -57,9 +41,6 @@ class Rectangle(Base):
 
     @property
     def x(self):
-        """
-        Getting the x coordinate of the Rectangle.
-        """
         return self.__x
 
     @x.setter
@@ -72,9 +53,6 @@ class Rectangle(Base):
 
     @property
     def y(self):
-        """
-        Getting the Y coordinate of the Rectangle.
-        """
         return self.__y
 
     @y.setter
@@ -86,64 +64,53 @@ class Rectangle(Base):
         self.__y = value
 
     def area(self):
+        """Returns area of the rectangle
         """
-        Returning the Recttangle's Area.
-        """
+
         return self.__width * self.__height
 
     def display(self):
+        """Returns printed rectangle with '#'
+        y is newline, x is space
         """
-        Print a Rectanlge with '#' character.
-        """
-        print("\n" * self.y, end='')
-        for i in range(self.height):
-            print(" " * self.x, end='')
-            print("#" * self.width)
 
-    def update(self, *args, **kwargs):
-        """
-        Updater for the Rectangle data.
-        Argumments:
-             *args    (int): New attributee values.
-                1st arg: means id attribute.
-                2nd arg: means Width attribute.
-                3rd arg: means height attribute.
-                4th arg: means x coordinate attribute.
-                5th arg: means y coordinate attribute.
-            **kwargs (dict): Key/Value pair of attributes.
-        """
-        if args and len(args) != 0:
-            for i in range(len(args)):
-                if i == 0:
-                    self.id = args[i]
-                if i == 1:
-                    self.width = args[i]
-                if i == 2:
-                    self. height = args[i]
-                if i == 3:
-                    self.x = args[i]
-                if i == 4:
-                    self.y = args[i]
-        else:
-            for key, value in kwargs.items():
-                if hasattr(self, key):
-                    setattr(self, key, value)
+        if self.__y != 0:
+            for newline in range(self.__y):
+                print()
 
-    def to_dictionary(self):
-        """
-        Return a dictionary.
-        """
-        return {
-            "id": self.id,
-            "width": self.width,
-            "height": self.height,
-            "x": self.x,
-            "y": self.y
-        }
+        for row in range(self.__height):
+            print((self.__x * " ") + (self.__width * '#'))
 
     def __str__(self):
+        """Returns formatted information display
         """
-        Return a Standard print().
+
+        return "[{}] ({}) {}/{} - {}/{}".format(self.__class__.__name__,
+                                                self.id, self.__x, self.__y,
+                                                self.__width, self.__height)
+
+    def update(self, *args, **kwargs):
+        """Updates rectangle values
         """
-        return "[Rectangle] ({}) {}/{} - {}/{}".format(
-            self.id, self.x, self.y, self.width, self.height)
+
+        if len(kwargs) != 0:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
+        elif len(args) != 0:
+            try:
+                self.id = args[0]
+                self.__width = args[1]
+                self.__height = args[2]
+                self.__x = args[3]
+                self.__y = args[4]
+            except IndexError:
+                pass
+        else:
+            print()
+
+    def to_dictionary(self):
+        """Returns dict representation
+        """
+
+        return {'x': self.__x, 'y': self.__y, 'id': self.id,
+                'height': self.__height, 'width': self.__width}
