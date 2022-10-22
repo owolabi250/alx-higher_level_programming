@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from pratice7 import add,sub,mul,div
 from sys import argv as h
-if len(h)-1 != 3:
+if len(h) != 4:
     print("Usage: {} <a> <operator> <b>".format(h[0]))
     exit(1)
 operator = ['+', '-', '*', '/']
