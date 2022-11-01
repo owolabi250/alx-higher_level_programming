@@ -6,8 +6,11 @@ def multiply_list_map(my_list=[], number=0):
     #     mul = i * 4
     #     new.append(mul)
     # return new
+    func = lambda x: x * number
+    mp = map(func,my_list)
+    ls = list(mp)
+    return ls
 
-    return list(map(lambda x: x * number, my_list))
 
 
 

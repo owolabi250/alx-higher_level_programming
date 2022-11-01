@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-# def simple_delete(a_dictionary, key=""):
-#     return ({k: a_dictionary[k] * 2 for k in a_dictionary})
-
-
 def simple_delete(a_dictionary, key=""):
+
     if key in a_dictionary:
         del a_dictionary[key]
-    return a_dictionary
+        return a_dictionary
+    else:
+        return a_dictionary
 
 print_sorted_dictionary = \
     __import__('pratice7').print_sorted_dictionary

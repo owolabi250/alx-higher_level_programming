@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 def square_matrix_simple(matrix=[]):
-    return [[i**2 for i in row] for row in (matrix)]
-    
+    # return [[i**2 for i in row] for row in (matrix)]
+    return[[num * num for num in row]for row in matrix]
 matrix = [
     [1, 2, 3],
     [4, 5, 6],
